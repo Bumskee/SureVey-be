@@ -74,3 +74,8 @@ class User(AbstractBaseUser):
         return self.admin
 
     objects = UserManager()
+
+class Documents(models.Model):
+    DocumentName = models.CharField(max_length=500)
+    DocumentDesc = models.TextField()
+    DocumentQuests = models.JSONField()
