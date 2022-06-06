@@ -11,5 +11,6 @@ router.register('users', UserViewSet)
 urlpatterns = [
     # path('', include(router.urls)),
     re_path(r'^form/(?P<id>[0-9a-f-]+)', documentApi),
-    re_path(r'^form$', documentApi)
+    re_path(r'^form$', documentApi),
+    re_path(r'get_all_forms', documentApi)
 ]

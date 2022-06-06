@@ -76,6 +76,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
 class Documents(models.Model):
+    DocumentID = models.CharField(max_length=1000)
     DocumentName = models.CharField(max_length=500)
     DocumentDesc = models.TextField()
     DocumentQuests = models.JSONField()

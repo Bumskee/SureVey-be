@@ -23,3 +23,7 @@ def documentApi(request, id=0):
             documents_serializer.save()
             return JsonResponse("Added Successfully", safe=False)
         return JsonResponse("Failed to Add", safe=False)
+    elif request.method=='GET':
+        documents = Documents.objects.all()
+        documents_serializer = DocumentSerializer(documents, many=True)
+        return JsonResponse(documents_serializer.data, safe=False)
