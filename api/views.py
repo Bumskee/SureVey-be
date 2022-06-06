@@ -36,7 +36,7 @@ def usersApi(request, id=0):
         if users_serializer.is_valid():
             users_serializer.save()
             return JsonResponse("Added Successfully", safe=False)
-        return JsonResponse("Failed to Add", safe=False)
+        return JsonResponse(("Failed to Add" + users_data), safe=False)
     elif request.method=='GET':
         user_data = User.objects.all()
         user_serializer = UserSerializer(user_data, many=True)
