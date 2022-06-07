@@ -1,6 +1,6 @@
-from urllib import response
 from api.serializers import DocumentSerializer
-from django.shortcuts import render
+from api.models import Documents
+from api.serializers import DocumentSerializer, UserSerializer
 from rest_framework import viewsets
 from rest_framework.parsers import JSONParser
 from django.contrib.auth import get_user_model
@@ -55,3 +55,17 @@ def documentDetails(request, id):
         document.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
+@csrf_exempt
+def usersApi(request, id=0):
+    if request.method=='POST':
+        users_data = JSONParser().parse(request)
+        users_serializer = UserSerializer(data=users_data)
+        if users_serializer.is_valid():
+            users_serializer.save()
+            return JsonResponse("Added Successfully", safe=False)
+        return JsonResponse(("Failed to Add" + users_data), safe=False)
+    elif request.method=='GET':
+        user_data = User.objects.all()
+        user_serializer = UserSerializer(user_data, many=True)
+        return JsonResponse(user_serializer.data, safe=False)
