@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
-from django_base64field.fields import Base64Field
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, image=None, **extra_fields):
@@ -43,7 +42,7 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    image = Base64Field(max_length=1000000, blank=True, null=True)
+    image = models.CharField(max_length=900000)
     staff = models.BooleanField(default=False) # for admin but not superuser
     admin = models.BooleanField(default=False) # for superuser
 
