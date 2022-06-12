@@ -2,12 +2,13 @@ from django.db import models
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, password=None, image=None, **extra_fields):
-        if not email:
-            raise ValueError('Users must have an email address')
+    def create_user(self, email, image, password=None, **extra_fields):
+        if not email and image:
+            raise ValueError('Please fill all forms and details.')
 
         user = self.model(
             email=self.normalize_email(email),
+            image=image,
             **extra_fields
         )
 
@@ -24,9 +25,10 @@ class UserManager(BaseUserManager):
         user.save(using=self.db)
         return user
 
-    def create_superuser(self, email, password):
+    def create_superuser(self, email, image, password):
         user = self.create_user(
             email,
+            image=image,
             password=password,
         )
         user.staff = True
