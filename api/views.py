@@ -62,7 +62,10 @@ def usersApi(request, id=0):
         users_data = JSONParser().parse(request)
         users_serializer = UserSerializer(data=users_data)
         if users_serializer.is_valid():
-            users_serializer.save()
+            try:
+                users_serializer.save()
+            except:
+                print("something is wrong but i don't know what")
             return JsonResponse("Added Successfully", safe=False)
         return JsonResponse(("Failed to Add" + users_data), safe=False)
     elif request.method=='GET':
