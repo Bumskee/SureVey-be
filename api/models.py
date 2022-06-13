@@ -81,4 +81,7 @@ class Documents(models.Model):
     DocumentName = models.CharField(max_length=500)
     DocumentDesc = models.TextField()
     DocumentQuests = models.JSONField()
-    Creator = models.IntegerField()
+    Creator = models.EmailField(
+        verbose_name = 'email address',
+        max_length=255,
+    )
